@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% extends 'base.html'%}
+{% block body %}
+{% load static %}
+
+<nav class="navbar bg-dark navbar-dark">
+	<div class="container">
+	    <a href="" class="navbar-brand">Pattern</a>
+	</div>
+</nav>
+
+<!-- Jumbotron -->
+<section  class="jumbotron text-center charityimg">
+	<h1 class="display-3"><strong>Charity Name</strong></h1>
+	<a href="" class="btn btn-primary">Do Something</a>
+	<a href="" class="btn btn-success">Another Thing</a>
+</section>
+
+<!-- Selection -->
+<section id="gallery">	
+   <div class="container">
+        <div class="row d-flex justify-content-around">
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                    	<img src="{% static 'images/excel.jpg' %}" class="cardfit">
+                        <h5 class="card-title"><strong>Upload Data</strong></h5>
+                        <p class="card-text">Please make sure the file is in <strong>CSV</strong> format. <strong>Missing required</strong> information will result in the file not been uploaded</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploaddata">Upload</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                    	<img src="{% static 'images/word.jpg' %}" class="cardfit">
+                        <h5 class="card-title"><strong>Download Letter</strong></h5>
+                        <p class="card-text">Date range is based on when <strong>the data was uploaded</strong>. Select the files you need based on fulfilment</p>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#downloadletter">Upload</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+</section>
+
+<!-- Modal -->
+
+<!-- Upload data -->
+<div class="modal fade" id="uploaddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					{{ form }}		
+					</div>
+					<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" name="uploaddata" value="clicked">Upload</button>
+					</div>
+				</form>		
+		</div>
+	</div>
+</div>
+
+<!-- Download letter -->
+<div class="modal fade" id="downloadletter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+			...
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary" name="downloadletter" value="clicked">Download</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

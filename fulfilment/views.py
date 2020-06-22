@@ -1,3 +1,7 @@
 from django.shortcuts import render
+from django.shortcuts import HttpResponse
 
-# Create your views here.
+def fulfilment_page(request):
+    template = 'fulfilment/main.html'
+    context = {}
+    return HttpResponse('fulfilment Page')

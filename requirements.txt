@@ -1,3 +1,4 @@
 django-pyodbc-azure
 wfastcgi
+django-crispy-forms
 

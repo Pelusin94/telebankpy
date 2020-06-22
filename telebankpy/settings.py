@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'fulfilment',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -51,10 +53,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'telebankpy.urls'
 
+TEMP_DIR = os.path.join(BASE_DIR, 'templates')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMP_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,4 +120,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# STATIC FILES
 STATIC_URL = '/static/'
+STATIC_DIR = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
+
+# MEDIA FILES
+MEDIA_URL = '/media/'
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = MEDIA_DIR
+
+#CRISPY
+CRISPY_TEMPLATE_PACK='bootstrap4'
+LOGIN_REDIRECT_URL = '/'
