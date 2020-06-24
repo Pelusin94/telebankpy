@@ -15,6 +15,21 @@
 </head>
 
 <body>
+<!-- Navbar -->
+	<nav class="navbar bg-dark navbar-dark">
+		<div class="container">
+		    <a href="" class="navbar-brand">IT Team Enterprise</a>
+		    {% if user.is_authenticated %}
+		    <a href="logout/" class="navbar-brand">Log out</a>
+		    {% else %}
+		    <a href="login/" class="navbar-brand">Log in</a>
+		    {% endif %}
+		</div>
+	</nav>
+<!-- Jumbotron -->
+<section  class="jumbotron text-center tbimg">
+	<h1 class="display-3"><strong>Telebank</strong></h1>
+</section>
 
 <div>
 	{% block body %}
