@@ -1,9 +1,9 @@
 from django.db import models
 
 class UploadFile(models.Model):
-    upload_date     = models.DateField(auto_now_add=True)
-    file_name       = models.CharField(max_length=100)
-    user_id         = models.CharField(max_length=100)
+    upload_date     = models.DateField(auto_now_add=True, blank=True, null=True)
+    file_name       = models.CharField(max_length=100, blank=True, null=True)
+    user_id         = models.CharField(max_length=100, blank=True, null=True)
     file_path       = models.FileField(upload_to='data')
 
     def __str__(self):

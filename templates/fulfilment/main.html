@@ -4,80 +4,65 @@
 {% load static %}
 
 <!-- Selection -->
+
+<!-- Four Paws -->
 <section id="gallery">	
-   <div class="container">
+    <div class="container">
         <div class="row d-flex justify-content-around">
             <div class="col-lg-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                    	<img src="{% static 'images/fulfilment/excel.jpg' %}" class="cardfit">
-                        <h5 class="card-title"><strong>Upload Data</strong></h5>
-                        <p class="card-text">Please make sure the file is in <strong>CSV</strong> format. <strong>Missing required</strong> information will result in the file not been uploaded</p>
+                    	<img src="{% static 'images/fulfilment/fourpaws.jpg' %}" class="cardfit">
+                        <h5 class="card-title"><strong>Four Paws</strong></h5>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploaddata">Upload</button>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-4 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                    	<img src="{% static 'images/fulfilment/word.jpg' %}" class="cardfit">
-                        <h5 class="card-title"><strong>Download Letter</strong></h5>
-                        <p class="card-text">Date range is based on when <strong>the data was uploaded</strong>. Select the files you need based on fulfilment</p>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#downloadletter">Upload</button>
-                    </div>
-                </div>
-            </div>
         </div>
-   </div>
+    </div>
 </section>
 
 <!-- Modal -->
 
-<!-- Upload data -->
+<!-- FourPaws -->
 <div class="modal fade" id="uploaddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
+			<!-- Upload -->
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
+				<h5 class="modal-title" id="exampleModalCenterTitle">Upload Data</h5>
 				</button>
 			</div>
 			<div class="modal-body">
 				<form method="POST" enctype="multipart/form-data">
 					{% csrf_token %}
-					{{ form }}		
-					</div>
-					<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary" name="uploaddata" value="clicked">Upload</button>
-					</div>
-				</form>		
-		</div>
-	</div>
-</div>
+					{{ form_data }}
+					<div>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary" name="fourpaws_upload" value="clicked">Upload</button>
+					</div>	
+				</form>
+			</div>
+			<div class="modal-footer"></div>
 
-<!-- Download letter -->
-<div class="modal fade" id="downloadletter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
+			<!-- Download -->
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
+				<h5 class="modal-title" id="exampleModalCenterTitle">Download Letter</h5>
 				</button>
 			</div>
 			<div class="modal-body">
-			...
+				<form method="GET" enctype="multipart/form-data">
+					{% csrf_token %}
+					{{ form_letter }}
+					<div>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary" name="fourpaws_download" value="clicked">Download</button>
+					</div>	
+				</form>
 			</div>
-			<div class="modal-footer">
-			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-			<button type="button" class="btn btn-primary" name="downloadletter" value="clicked">Download</button>
-			</div>
+
 		</div>
 	</div>
 </div>
-
 
 {% endblock %}
