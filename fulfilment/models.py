@@ -41,7 +41,7 @@ class FulfilmentFilesData(models.Model):
     bank_account_number     = models.IntegerField(null=True)
     giftaid_decl            = models.CharField(max_length=100, null=True)
     frequency               = models.CharField(max_length=100, null=True)
-    first_collection_date   = models.DateField(null=True)
+    first_collection_date   = models.CharField(max_length=100, null=True)
     amount                  = models.DecimalField(decimal_places=2, max_digits=10, null=True)
 
     def __str__(self):
