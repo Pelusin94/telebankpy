@@ -12,33 +12,31 @@ def fulfilment_page(request):
     form_letter = forms.DownloadLetterForm()
     model = models.FulfilmentFilesData.objects.all()
     uploaded = False
-    row_count = 0
+    records_count = 0
 
-    context = {
-        'form_data': form_data,
-        'form_letter': form_letter,
-        'uploaded': uploaded,
-    }
+
 #--------------------IMPORTS--------------------------------------------
     if request.method == 'POST':
         form = forms.UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             file = form.cleaned_data['file_path']
-            file_name = form.cleaned_data['file_name'] = file.name
-            user = form.cleaned_data['user_id'] = request.user.username
             path = form.cleaned_data['file_path']
             data = file.read().decode('UTF-8').splitlines()
             dic_data = csv.DictReader(data)
-            records_count = 0
+            form = form.save(commit=False)
+            form.file_name = file
+            form.user_id = 'izipizi'
 
 
 #------FourPaws----
 
             if request.POST.get('fourpaws_upload'):
+                model.delete()
                 for row in dic_data:
+
                     model.create(
                         charity_name            = 'fourpaws',
-                        file_name               = file_name,
+                        file_name               = form.file_name,
                         title                   = row['title'],
                         firstname               = row['forename'],
                         surname                 = row['surname'],
@@ -55,8 +53,18 @@ def fulfilment_page(request):
                         amount                  = row['amount'],
                         frequency               = row['frequency']
                     )
+                    records_count += 1
+                models.UploadFile.objects.all().delete()
                 form.save()
 
+    context = {
+        'form_data': form_data,
+        'form_letter': form_letter,
+        'uploaded': uploaded,
+        'records_count': records_count,
+        'model': model,
+        'model2': models.UploadFile.objects.all()
+    }
 
 
     return render(request, template, context)

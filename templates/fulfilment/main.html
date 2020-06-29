@@ -14,13 +14,58 @@
                     <div class="card-body">
                     	<img src="{% static 'images/fulfilment/fourpaws.jpg' %}" class="cardfit">
                         <h5 class="card-title"><strong>Four Paws</strong></h5>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploaddata">Upload</button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploaddata">Go</button>
                     </div>
+
+					<div>
+						{% if records_count > 0 %}
+							<h5>{{ records_count }} have been imported</h5>
+						{% endif %}
+					</div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+<table>
+	<thead>
+		<th>charity_name</th>
+		<th>file_name</th>
+		<th>firstname</th>
+		<th>surname</th>
+	</thead>
+	<tbody>
+		{% for record in  model %}
+			<tr>
+				<td>{{record.charity_name}}</td>
+				<td>{{record.file_name}}</td>
+				<td>{{record.firstname}}</td>
+				<td>{{record.surname}}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+<table>
+	<thead>
+		<th>upload_date</th>
+		<th>file_name</th>
+		<th>user_id </th>
+		<th>surname</th>
+	</thead>
+	<tbody>
+		{% for record in  model2 %}
+			<tr>
+				<td>{{record.upload_date}}</td>
+				<td>{{record.file_name}}</td>
+				<td>{{record.user_id }}</td>
+				<td>{{record.file_path }}</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
 
 <!-- Modal -->
 
@@ -40,7 +85,7 @@
 					<div>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-primary" name="fourpaws_upload" value="clicked">Upload</button>
-					</div>	
+					</div>
 				</form>
 			</div>
 			<div class="modal-footer"></div>
