@@ -25,7 +25,7 @@ def fulfilment_page(request):
             dic_data = csv.DictReader(data)
             form = form.save(commit=False)
             form.file_name = file
-            form.user_id = 'izipizi'
+            form.user_id = request.user.username
 
 
 #------FourPaws----
@@ -57,13 +57,32 @@ def fulfilment_page(request):
                 models.UploadFile.objects.all().delete()
                 form.save()
 
+#--------------------EXPORTS--------------------------------------------
+    if request.method == 'GET':
+        form = forms.DownloadLetterForm(request.GET)
+        if form.is_valid():
+            date_from = form.cleaned_data['date_from']
+            date_to = form.cleaned_data['date_to']
+            model = models.DownloadFile.objects.all()
+
+# ------FourPaws----
+            if request.GET.get('fourpaws_download'):
+                model.create(
+                    date_from = date_from,
+                    date_to = date_to,
+                    user_id = request.user.username,
+                    charity_name = 'fourpaws'
+                )
+
+
     context = {
         'form_data': form_data,
         'form_letter': form_letter,
         'uploaded': uploaded,
         'records_count': records_count,
         'model': model,
-        'model2': models.UploadFile.objects.all()
+        'model2': models.UploadFile.objects.all(),
+        'model3': models.DownloadFile(),
     }
 
 

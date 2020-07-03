@@ -18,6 +18,22 @@ class UploadFile(models.Model):
     def __str__(self):
         return self.file_path
 
+class DownloadFile(models.Model):
+    merge_date      = models.DateField(auto_now_add=True, blank=True, null=True)
+    date_from       = models.DateField()
+    date_to         = models.DateField()
+    user_id         = models.CharField(max_length=100, blank=True, null=True)
+    charity_name    = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return self.merge_date
+
+    def __str__(self):
+        return self.date_from
+
+    def __str__(self):
+        return self.date_to
+
 
 class FulfilmentFilesData(models.Model):
     charity_name            = models.CharField(max_length=100, null=True)

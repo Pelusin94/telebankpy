@@ -19,3 +19,5 @@ class UploadFileForm(forms.ModelForm):
 class DownloadLetterForm(forms.Form):
     date_from = forms.CharField(widget=forms.DateInput(attrs={'type': 'date'}))
     date_to = forms.CharField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+
