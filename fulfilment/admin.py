@@ -1,3 +1,7 @@
 from django.contrib import admin
+from . import models
 
-# Register your models here.
+
+admin.site.register(models.FulfilmentFilesData)
+admin.site.register(models.DownloadFile)
+admin.site.register(models.UploadFile)
