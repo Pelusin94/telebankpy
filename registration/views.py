@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import reverse, redirect
 from . import forms
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -22,12 +23,15 @@ def login_page(request):
             charity_name = form.cleaned_data['charity_name']
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user:
+                if user.is_active:
+                    login(request,user)
+                    request.session['charity_name'] = charity_name
+                    return redirect(main_page)
 
-            user = authenticate(request, username=username, password=password)
-            login(request,user)
-            return HttpResponse('izi pizi')
 
     context = {
-        'form':form
+        'form': form
     }
     return render(request, template, context)
