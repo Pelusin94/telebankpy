@@ -5,16 +5,39 @@
 
 <!-- Selection -->
 
-<!-- Four Paws -->
+<!-- Upload -->
 <section id="gallery">	
     <div class="container">
         <div class="row d-flex justify-content-around">
             <div class="col-lg-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                    	<img src="{% static 'images/fulfilment/fourpaws.jpg' %}" class="cardfit">
-                        <h5 class="card-title"><strong>Four Paws</strong></h5>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#uploaddata">Go</button>
+                    	<img src="" class="cardfit" alt="">
+                        <h5 class="card-title"><strong>Upload Data</strong></h5>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload">Go</button>
+                    </div>
+
+					<div>
+						{% if records_count > 0 %}
+							<h5>{{ records_count }} have been imported</h5>
+						{% endif %}
+					</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Download -->
+<section id="gallery">	
+    <div class="container">
+        <div class="row d-flex justify-content-around">
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                    	<img src="" class="cardfit" alt="">
+                        <h5 class="card-title"><strong>Download letters</strong></h5>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#download">Go</button>
                     </div>
 
 					<div>
@@ -71,8 +94,8 @@
 
 <!-- Modal -->
 
-<!-- FourPaws -->
-<div class="modal fade" id="uploaddata" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Upload -->
+<div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<!-- Upload -->
@@ -86,13 +109,21 @@
 					{{ form_data }}
 					<div>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary" name="fourpaws_upload" value="clicked">Upload</button>
+						<button type="submit" class="btn btn-primary" name="upload" value="clicked">Upload</button>
 					</div>
 				</form>
 			</div>
 			<div class="modal-footer"></div>
+		</div>
+	</div>
+</div>
 
-			<!-- Download -->
+<!-- Download -->
+
+<div class="modal fade" id="download" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<!-- Upload -->
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalCenterTitle">Download Letter</h5>
 				</button>
@@ -102,11 +133,10 @@
 					{{ form_letter }}
 					<div>
 						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary" name="fourpaws_download" value="clicked">Download</button>
+						<button type="submit" class="btn btn-primary" name="download" value="clicked">Download</button>
 					</div>	
 				</form>
 			</div>
-
 		</div>
 	</div>
 </div>

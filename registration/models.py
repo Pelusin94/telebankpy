@@ -9,3 +9,5 @@ class CharityNames(models.Model):
 
     def __str__(self):
         return self.system_name
+
+

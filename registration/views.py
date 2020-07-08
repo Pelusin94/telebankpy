@@ -12,6 +12,11 @@ def main_page(request):
     return render(request, template, context)
 
 
+def logout_page(request):
+    logout(request)
+    return redirect(main_page)
+
+
 def login_page(request):
     template = 'registration/login.html'
     form = forms.UploadFileForm()
@@ -29,7 +34,6 @@ def login_page(request):
                     login(request,user)
                     request.session['charity_name'] = charity_name
                     return redirect(main_page)
-
 
     context = {
         'form': form
