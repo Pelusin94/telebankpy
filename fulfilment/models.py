@@ -1,13 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
+from registration.models import CharityNames
 
 class UploadFile(models.Model):
     upload_date     = models.DateField(auto_now_add=True, blank=True, null=True)
     file_name       = models.CharField(max_length=100, blank=True, null=True)
-    user_id         = models.CharField(max_length=100, blank=True, null=True)
+    user_id         = models.ForeignKey(User, on_delete= models.DO_NOTHING)
     file_path       = models.FileField(upload_to='data')
-
-    def __str__(self):
-        return self.upload_date
+    charity_name    = models.ForeignKey(CharityNames, on_delete= models.DO_NOTHING)
 
     def __str__(self):
         return self.file_name
@@ -15,15 +15,13 @@ class UploadFile(models.Model):
     def __str__(self):
         return self.user_id
 
-    def __str__(self):
-        return self.file_path
 
 class DownloadFile(models.Model):
     merge_date      = models.DateField(auto_now_add=True, blank=True, null=True)
     date_from       = models.DateField()
     date_to         = models.DateField()
-    user_id         = models.CharField(max_length=100, blank=True, null=True)
-    charity_name    = models.CharField(max_length=100, null=True)
+    user_id         = models.ForeignKey(User, on_delete= models.DO_NOTHING)
+    charity_name    = models.ForeignKey(CharityNames, on_delete= models.DO_NOTHING)
 
     def __str__(self):
         return self.merge_date
@@ -36,9 +34,8 @@ class DownloadFile(models.Model):
 
 
 class FulfilmentFilesData(models.Model):
-    charity_name            = models.CharField(max_length=100, null=True)
-    file_name               = models.CharField(max_length=100, null=True)
-    upload_date             = models.DateField(auto_now_add=True)
+    charity_name            = models.ForeignKey(CharityNames, on_delete= models.DO_NOTHING)
+    file_name               = models.ForeignKey(UploadFile, on_delete= models.DO_NOTHING)
     urn                     = models.CharField(max_length=100, null=True)
     title                   = models.CharField(max_length=100, null=True)
     firstname               = models.CharField(max_length=100, null=True)
@@ -62,9 +59,6 @@ class FulfilmentFilesData(models.Model):
 
     def __str__(self):
         return self.file_name
-
-    def __str__(self):
-        return self.upload_date
 
     def __str__(self):
         return self.urn

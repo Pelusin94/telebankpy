@@ -19,10 +19,10 @@ def logout_page(request):
 
 def login_page(request):
     template = 'registration/login.html'
-    form = forms.UploadFileForm()
+    form = forms.LoginForm()
 
     if request.method == 'POST':
-        form = forms.UploadFileForm(request.POST)
+        form = forms.LoginForm(request.POST)
 
         if form.is_valid():
             charity_name = form.cleaned_data['charity_name']

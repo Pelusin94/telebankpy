@@ -13,18 +13,21 @@ def fulfilment_page(request):
     records_count = 0
     charity_name = request.session.get('charity_name')
 
-#--------------------IMPORTS--------------------------------------------
+
     if request.method == 'POST':
         form = forms.UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             file = form.cleaned_data['file_path']
             data = file.read().decode('UTF-8').splitlines()
             dic_data = csv.DictReader(data)
+            # FILLING REMAING MODEL'S FIELDS
             form = form.save(commit=False)
             form.file_name = file
             form.user_id = request.user.username
+            # MAPPING AND IMPORTING DATA ACCORDING TO THE CHARITY SPECS AND RETREAVE NUMBER OF RECORDS IMPORTED
             data_import = CharityMapping(charity_name, model, file, dic_data)
             records_count = data_import.mapper()
+            # SAVINTG PHYSICAL COPY
             form.save()
 
 #--------------------EXPORTS--------------------------------------------

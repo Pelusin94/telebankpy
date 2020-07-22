@@ -2,7 +2,7 @@ from django import forms
 from . import models
 
 
-class UploadFileForm(forms.Form):
+class LoginForm(forms.Form):
 
     charity_choices = [
         (charity.system_name, charity.display_name) for charity in models.CharityNames.objects.all()
