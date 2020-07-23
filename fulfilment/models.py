@@ -2,12 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from registration.models import CharityNames
 
+class FulfilmentType(models.Model):
+    charity_name    = models.ForeignKey(CharityNames, on_delete= models.DO_NOTHING)
+    file_type       = models.CharField(max_length=100, blank=True, null=True)
+
 class UploadFile(models.Model):
     upload_date     = models.DateField(auto_now_add=True, blank=True, null=True)
     file_name       = models.CharField(max_length=100, blank=True, null=True)
     user_id         = models.ForeignKey(User, on_delete= models.DO_NOTHING)
     file_path       = models.FileField(upload_to='data')
     charity_name    = models.ForeignKey(CharityNames, on_delete= models.DO_NOTHING)
+    file_type       = models.ForeignKey(FulfilmentType, on_delete= models.DO_NOTHING, null=True)
 
     def __str__(self):
         return self.file_name

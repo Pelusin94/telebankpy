@@ -24,28 +24,20 @@ def fulfilment_page(request):
             form = form.save(commit=False)
             form.file_name = file
             form.user_id = request.user.username
+            form.charity_name = charity_name
             # MAPPING AND IMPORTING DATA ACCORDING TO THE CHARITY SPECS AND RETREAVE NUMBER OF RECORDS IMPORTED
             data_import = CharityMapping(charity_name, model, file, dic_data)
             records_count = data_import.mapper()
             # SAVINTG PHYSICAL COPY
             form.save()
 
-#--------------------EXPORTS--------------------------------------------
+
     if request.method == 'GET':
         form = forms.DownloadLetterForm(request.GET)
         if form.is_valid():
             date_from = form.cleaned_data['date_from']
             date_to = form.cleaned_data['date_to']
-            model = models.DownloadFile.objects.all()
 
-# ------FourPaws----
-            if request.GET.get('fourpaws_download'):
-                model.create(
-                    date_from = date_from,
-                    date_to = date_to,
-                    user_id = request.user.username,
-                    charity_name = 'fourpaws'
-                )
 
     context = {
         'form_data': form_data,
