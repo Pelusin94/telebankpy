@@ -52,6 +52,56 @@
 </section>
 
 
+<!-- Modal -->
+
+<!-- Upload -->
+<div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<!-- Upload -->
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalCenterTitle">Upload Data</h5>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="POST" enctype="multipart/form-data">
+					{% csrf_token %}
+					{{ form_data.as_p }}
+					<div>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary" name="upload" value="clicked">Upload</button>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer"></div>
+		</div>
+	</div>
+</div>
+
+<!-- Download -->
+
+<div class="modal fade" id="download" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<!-- Upload -->
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalCenterTitle">Download Letter</h5>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form method="GET" enctype="multipart/form-data">
+					{{ form_letter.as_p }}
+					<div>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary" name="download" value="clicked">Download</button>
+					</div>	
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <table>
 	<thead>
 		<th>upload_date</th>
@@ -89,56 +139,4 @@
 		{% endfor %}
 	</tbody>
 </table>
-
-
-
-<!-- Modal -->
-
-<!-- Upload -->
-<div class="modal fade" id="upload" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<!-- Upload -->
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalCenterTitle">Upload Data</h5>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form method="POST" enctype="multipart/form-data">
-					{% csrf_token %}
-					{{ form_data }}
-					<div>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary" name="upload" value="clicked">Upload</button>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer"></div>
-		</div>
-	</div>
-</div>
-
-<!-- Download -->
-
-<div class="modal fade" id="download" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<!-- Upload -->
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalCenterTitle">Download Letter</h5>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form method="GET" enctype="multipart/form-data">
-					{{ form_letter }}
-					<div>
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary" name="download" value="clicked">Download</button>
-					</div>	
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-
 {% endblock %}

@@ -6,6 +6,13 @@ class FulfilmentType(models.Model):
     charity_name    = models.ForeignKey(CharityNames, on_delete= models.DO_NOTHING)
     file_type       = models.CharField(max_length=100, blank=True, null=True)
 
+    def __str__(self):
+        return self.charity_name
+
+    def __str__(self):
+        return self.file_type
+
+
 class UploadFile(models.Model):
     upload_date     = models.DateField(auto_now_add=True, blank=True, null=True)
     file_name       = models.CharField(max_length=100, blank=True, null=True)
@@ -29,18 +36,15 @@ class DownloadFile(models.Model):
     charity_name    = models.ForeignKey(CharityNames, on_delete= models.DO_NOTHING)
 
     def __str__(self):
-        return self.merge_date
+        return self.charity_name
 
     def __str__(self):
-        return self.date_from
-
-    def __str__(self):
-        return self.date_to
+        return self.user_id
 
 
 class FulfilmentFilesData(models.Model):
+    upload_date             = models.DateField(auto_now_add=True, blank=True, null=True)
     charity_name            = models.ForeignKey(CharityNames, on_delete= models.DO_NOTHING)
-    file_name               = models.ForeignKey(UploadFile, on_delete= models.DO_NOTHING)
     urn                     = models.CharField(max_length=100, null=True)
     title                   = models.CharField(max_length=100, null=True)
     firstname               = models.CharField(max_length=100, null=True)

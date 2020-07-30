@@ -9,7 +9,7 @@ class UploadFileForm(forms.ModelForm):
     class Meta:
 
         model   = models.UploadFile
-        exclude = ['upload_date', 'charity_name','file_type']
+        exclude = ['upload_date', 'charity_name',]
         widgets = {
             'file_name': forms.HiddenInput(),
             'user_id': forms.HiddenInput(),
